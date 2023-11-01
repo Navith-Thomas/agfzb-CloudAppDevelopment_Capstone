@@ -5,19 +5,16 @@ from django.utils.timezone import now
 # Create your models here.
 
 # <HINT> Create a Car Make model `class CarMake(models.Model)`:
-# - Name
-# - Description
-# - Any other fields you would like to include in car make model
-# - __str__ method to print a car make object
 class CarMake(models.Model):
-    make_name = models.CharField(null=False, max_length=50)
+    make_name = models.CharField(null=False, max_length=100)
     description = models.TextField()
-    country = models.CharField(max_length=30)
+    country = models.CharField(max_length=50)
 # - Any other fields you would like to include in car make model
     def __str__(self):
         return "Name: " + self.make_name + "," + \
             "Description: " + self.description + "," + \
             "Country: " + self.country
+
 
 # <HINT> Create a Car Model model `class CarModel(models.Model):`:
 # - Many-To-One relationship to Car Make model (One Car Make has many Car Models, using ForeignKey field)
@@ -27,7 +24,6 @@ class CarMake(models.Model):
 # - Year (DateField)
 # - Any other fields you would like to include in car model
 # - __str__ method to print a car make object
-
 class CarModel(models.Model):
     SEDAN = 'sedan'
     SUV = 'SUV'
@@ -46,11 +42,9 @@ class CarModel(models.Model):
     def __str__(self):
         return "Name: " + self.model_name + "," + \
             "Car Type: " + self.car_type
+            
 
-
-# <HINT> Create a plain Python class `CarDealer` to hold dealer data
-class CarDealer:
-
+class CarDealer():
     def __init__(self, address, city, full_name, id, lat, long, short_name, st, zip):
         # Dealer address
         self.address = address
@@ -74,5 +68,18 @@ class CarDealer:
     def __str__(self):
         return "Dealer name: " + self.full_name
 
+class DealerReview():
+    def __init__(self, dealership, name, purchase, review, car_make, car_model, car_year, id, purchase_date="", sentiment=""):
+        self.dealership = dealership
+        self.name = name
+        self.purchase = purchase
+        self.review = review
+        self.car_make = car_make
+        self.car_model = car_model
+        self.car_year = car_year
+        self.id = id
+        self.purchase_date = purchase_date
+        self.sentiment = sentiment
 
-# <HINT> Create a plain Python class `DealerReview` to hold review data
+    def __str__(self):
+        return "Review: " + self.name
